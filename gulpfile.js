@@ -3,4 +3,4 @@ var gulp = require('gulp'),
 
 requireDir('./gulp');
 
-gulp.task('default', ['server', 'watch']);
+gulp.task('default', ['server', 'watch', 'build-react']);
