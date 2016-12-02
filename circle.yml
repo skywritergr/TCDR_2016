@@ -2,6 +2,6 @@ deployment:
   push_to_server:
     branch: master
     commands:
-      - ssh circleci@138.68.95.18 "source ~/.bashrc; forever stopall"
+      - ssh root@138.68.95.18 "source ~/.bashrc; /root/.nvm/versions/node/v7.2.0/bin/forever stopall"
       - rsync -avz "$PWD" circleci@138.68.95.18:/var/www/html
-      - ssh circleci@138.68.95.18 "source ~/.bashrc; forever start /var/www/html/TCDR_2016/server.js"
+      - ssh root@138.68.95.18 "source ~/.bashrc; /root/.nvm/versions/node/v7.2.0/bin/forever start /var/www/html/TCDR_2016/server.js"
