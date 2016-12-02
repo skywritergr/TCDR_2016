@@ -4,7 +4,6 @@ test:
       - ssh circleci@138.68.95.18 "source ~/.bashrc"
       - ssh circleci@138.68.95.18 "/root/.nvm/versions/node/v7.2.0/bin/forever stopall"
 
-
 deployment:
   push_to_server:
     branch: master
