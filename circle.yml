@@ -1,11 +1,14 @@
 test:
   override:
     post:
-      - ssh circleci@138.68.95.18 "source ~/.bashrc; /root/.nvm/versions/node/v7.2.0/bin/forever stopall"
+      - ssh circleci@138.68.95.18 "source ~/.bashrc"
+      - ssh circleci@138.68.95.18 "/root/.nvm/versions/node/v7.2.0/bin/forever stopall"
+
 
 deployment:
   push_to_server:
     branch: master
     commands:
       - rsync -avz "$PWD" circleci@138.68.95.18:/var/www/html
+      - ssh circleci@138.68.95.18 "source ~/.bashrc"
       - ssh circleci@138.68.95.18 "forever start /var/www/html/TCDR_2016/server.js"
