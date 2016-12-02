@@ -1,0 +1,10 @@
+test:
+  post:
+    - forever stopall
+
+deployment:
+  push_to_server:
+    branch: master
+    commands:
+      - rsync -avz "$PWD" circleci@138.68.95.18:/var/www/html
+      - forever start server.js
