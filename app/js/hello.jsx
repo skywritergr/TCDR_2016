@@ -3,14 +3,14 @@ export default class Hello extends React.Component {
         super(props);
         this.state = { data : [] };
     }
-    
+
     componentDidMount(){
-        // Do Ajax requests here or anything you need to instantiate your state.
+        // Do Ajax requests here or anything you need to instantiate your state
     }
-    
+
     render(){
         return (
-          <h1>{this.props.message}</h1>  
+          <h1>{this.props.message}</h1>
         );
     }
 }
