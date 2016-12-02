@@ -8,4 +8,4 @@ deployment:
     branch: master
     commands:
       - rsync -avz "$PWD" circleci@138.68.95.18:/var/www/html
-      - ssh circleci@138.68.95.18 "source ~/.bashrc; forever start /var/www/html/TCDR_2016/server.js"
+      - ssh circleci@138.68.95.18 "forever start /var/www/html/TCDR_2016/server.js"
