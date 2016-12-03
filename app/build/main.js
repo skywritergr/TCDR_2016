@@ -58,13 +58,13 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _hello = __webpack_require__(3);
+	var _map = __webpack_require__(3);
 	
-	var _hello2 = _interopRequireDefault(_hello);
+	var _map2 = _interopRequireDefault(_map);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	ReactDOM.render(_react2.default.createElement(_hello2.default, { message: 'Hello World!' }), document.getElementById('content'));
+	ReactDOM.render(_react2.default.createElement(_map2.default, null), document.getElementById('content'));
 
 /***/ },
 /* 2 */
@@ -79,7 +79,7 @@
 	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 	
 	var _getPrototypeOf = __webpack_require__(4);
@@ -105,33 +105,31 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Hello = function (_React$Component) {
-	    (0, _inherits3.default)(Hello, _React$Component);
+	  (0, _inherits3.default)(Hello, _React$Component);
 	
-	    function Hello(props) {
-	        (0, _classCallCheck3.default)(this, Hello);
+	  function Hello(props) {
+	    (0, _classCallCheck3.default)(this, Hello);
 	
-	        var _this = (0, _possibleConstructorReturn3.default)(this, (Hello.__proto__ || (0, _getPrototypeOf2.default)(Hello)).call(this, props));
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (Hello.__proto__ || (0, _getPrototypeOf2.default)(Hello)).call(this, props));
 	
-	        _this.state = { data: [] };
-	        return _this;
+	    _this.state = {
+	      data: []
+	    };
+	    return _this;
+	  }
+	
+	  (0, _createClass3.default)(Hello, [{
+	    key: "componentDidMount",
+	    value: function componentDidMount() {
+	      // Do Ajax requests here or anything you need to instantiate your state
 	    }
-	
-	    (0, _createClass3.default)(Hello, [{
-	        key: "componentDidMount",
-	        value: function componentDidMount() {
-	            // Do Ajax requests here or anything you need to instantiate your state.
-	        }
-	    }, {
-	        key: "render",
-	        value: function render() {
-	            return React.createElement(
-	                "h1",
-	                null,
-	                this.props.message
-	            );
-	        }
-	    }]);
-	    return Hello;
+	  }, {
+	    key: "render",
+	    value: function render() {
+	      return React.createElement("div", { id: "map" });
+	    }
+	  }]);
+	  return Hello;
 	}(React.Component);
 	
 	exports.default = Hello;
