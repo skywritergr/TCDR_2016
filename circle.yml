@@ -4,5 +4,4 @@ deployment:
     commands:
       - ssh root@138.68.95.18 "source ~/.bashrc; /root/.nvm/versions/node/v7.2.0/bin/forever stopall"
       - rsync -avz "$PWD" circleci@138.68.95.18:/var/www/html
-      - yarn
       - ssh root@138.68.95.18 "source ~/.bashrc; /root/.nvm/versions/node/v7.2.0/bin/forever start /var/www/html/TCDR_2016/server.js"
