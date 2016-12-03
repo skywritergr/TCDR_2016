@@ -1,4 +1,6 @@
 import React from 'react'
-import Hello from './hello'
+import Map from './map'
 
-ReactDOM.render(<Hello message='Hello World!' />, document.getElementById('content'));
+ReactDOM.render(
+  <Map />, document.getElementById('content')
+);
