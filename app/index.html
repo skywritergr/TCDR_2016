@@ -27,6 +27,38 @@
   <div id="content"></div>
   <script src="build/main.js"></script>
   <script>
+
+
+// var mockJson = {"personalities": [{"Altruism": "0.385537374763", "Love": "0.385300974203", "Emotionality": "0.512108077928", "Sympathy": "0.62240275566", "Ideal": "0.362779722855", "Harmony": "0.240829263483", "Trust": "0.110861697225"}, {"Altruism": "0.936830479493", "Love": "0.0536111722051", "Emotionality": "0.576278254115", "Sympathy": "0.99993942884", "Ideal": "0.0237910755746", "Harmony": "0.014653746442", "Trust": "0.315728030914"}, {"Altruism": "0.883707433506", "Love": "0.00843993425943", "Emotionality": "0.880604271236", "Sympathy": "0.993843490452", "Ideal": "0.008817168833", "Harmony": "0.0303016596506", "Trust": "0.811143733595"}, {"Altruism": "0.980905391149", "Love": "0.340192468105", "Emotionality": "0.717257339034", "Sympathy": "0.98243256563", "Ideal": "0.209065694275", "Harmony": "0.637026676806", "Trust": "0.913365287488"}], "ids": ["3065675733", "1320535340", "18669246", "2479523070"], "coords": ["51.50013926,-0.12450144", "51.511841,-0.118559", "51.507695618,-0.127349761", "51.5,-0.13"], "scores": ["36.9204603124", "74.3324319951", "88.7269236993", "94.9312070608"], "helpers": ["UK Politics News", "wassim ajouz", "(((davidberens)))", "Edward Gibbon"], "message": "I need shelter near Trafalgar Square"};
+
+var mockJson = {};
+
+function httpGet(theUrl)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+}
+
+function setJson(res){
+  mockJson = res;
+};
+
+var jqxhr = $.getJSON( 'http://disruptlondon2015.appspot.com/list', function(data) {
+  setJson(data);
+})
+  .done(function() {
+    // alert( "second success" );
+  })
+  .fail(function() {
+    alert( "error" );
+  })
+  .always(function() {
+    // alert( "finished" );
+  });
+
+
     require([
       "esri/config",
       "esri/Map",
@@ -78,15 +110,7 @@
 
       view.ui.move([ "zoom", toggle ], "top-right");
 
-      var json = [
-        [0.1378, 51.5174, 'user1'],
-        [0.1478, 51.5014,'user2'],
-        [0.0278, 51.6074,'user3'],
-        [0.1178, 51.5074,'user4'],
-        [0.1078, 51.5474,'user5']
-      ];
 
-      var mockJson = {"personalities": [{"Altruism": "0.385537374763", "Love": "0.385300974203", "Emotionality": "0.512108077928", "Sympathy": "0.62240275566", "Ideal": "0.362779722855", "Harmony": "0.240829263483", "Trust": "0.110861697225"}, {"Altruism": "0.936830479493", "Love": "0.0536111722051", "Emotionality": "0.576278254115", "Sympathy": "0.99993942884", "Ideal": "0.0237910755746", "Harmony": "0.014653746442", "Trust": "0.315728030914"}, {"Altruism": "0.883707433506", "Love": "0.00843993425943", "Emotionality": "0.880604271236", "Sympathy": "0.993843490452", "Ideal": "0.008817168833", "Harmony": "0.0303016596506", "Trust": "0.811143733595"}, {"Altruism": "0.980905391149", "Love": "0.340192468105", "Emotionality": "0.717257339034", "Sympathy": "0.98243256563", "Ideal": "0.209065694275", "Harmony": "0.637026676806", "Trust": "0.913365287488"}], "ids": ["3065675733", "1320535340", "18669246", "2479523070"], "coords": ["51.50013926,-0.12450144", "51.511841,-0.118559", "51.507695618,-0.127349761", "51.5,-0.13"], "scores": ["36.9204603124", "74.3324319951", "88.7269236993", "94.9312070608"], "helpers": ["UK Politics News", "wassim ajouz", "(((davidberens)))", "Edward Gibbon"], "message": "I need shelter near Trafalgar Square"};
 
       var markerSymbol = new SimpleMarkerSymbol({
         color: [226, 119, 40],

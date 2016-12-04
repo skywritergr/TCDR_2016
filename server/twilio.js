@@ -10,12 +10,12 @@ module.exports = {
 	getTwilioConfig: getTwilioConfig,
 	createConferenceCallRoom: createConferenceCallRoom,
 	sendResponse: sendResponse,
-    recieveMessage:recieveMessage,
-    getTwiterData:getTwiterData
+    recieveMessage:recieveMessage
 }
 
 function getTwilioConfig(req, res) {
-	res.send(process.env.TWILIO_ACCOUNT_SID + ' / ' + process.env.TWILIO_AUTH_TOKEN);
+	//res.send(process.env.TWILIO_ACCOUNT_SID + ' / ' + process.env.TWILIO_AUTH_TOKEN);
+        watson.getTwiterData();
 }
 
 
@@ -43,11 +43,7 @@ function createConferenceCallRoom(req, res) {
 function sendResponse(req, res) {
     var twiml = new twilio.TwimlResponse();
 
-    watson.getHealthCareAdvice(req.body, function(result) {
-        twiml.message(result);
-        res.writeHead(200, { 'Content-Type': 'text/xml' });
-        res.end(twiml.toString());
-    });
+v
 }
 
 function sendToWatson(req, res) {
@@ -58,10 +54,6 @@ function sendToWatson(req, res) {
         res.writeHead(200, { 'Content-Type': 'text/xml' });
         res.end(twiml.toString());
     });
-}
-
-function getTwiterData(req, res){
-    console.log(req, res);
 }
 
 // function connectDoctorAndPatient(req, res) {

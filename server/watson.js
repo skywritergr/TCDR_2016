@@ -1,7 +1,8 @@
 var http = require('http');
 
 module.exports = {
-	getHealthCareAdvice: getHealthCareAdvice
+	getHealthCareAdvice: getHealthCareAdvice,
+	getTwiterData: getTwiterData
 }
 
 var watsonUrl = 'http://disruptlondon2015.appspot.com/need?text=';
@@ -28,4 +29,21 @@ function getHealthCareAdvice(twilioPostBody, cb) {
 	//     cb(str);
 	//   });
 	});
+}
+
+
+
+function getTwiterData(req, res){
+	var watsonRequest = 'http://disruptlondon2015.appspot.com/list'
+	console.log("this is a request")
+	// var result = http.get(watsonRequest, function(watsonReponse){
+	// 	 var str = '';
+    //   console.log("Got response: " + watsonReponse.statusCode);
+      
+	//   watsonReponse.on('data', function(chunk) {
+	//     str += chunk;
+    //     console.log("str", str);
+    //     console.log("chunk", chunk);
+	//   });
+	// })
 }
