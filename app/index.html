@@ -40,7 +40,7 @@
       "esri/symbols/PictureMarkerSymbol",
       "esri/Graphic",
       "dojo/domReady!"
-    ], function(esriConfig, Map, MapView, DefaultUI, WebTileLayer, Basemap, Point, SimpleMarkerSymbol, Graphic) {
+    ], function(esriConfig, Map, MapView, DefaultUI, WebTileLayer, Basemap, Point, SimpleMarkerSymbol, PictureMarkerSymbol, Graphic) {
 
       esriConfig.request.corsEnabledServers.push("a.tile.stamen.com",
         "b.tile.stamen.com", "c.tile.stamen.com", "d.tile.stamen.com");
@@ -62,14 +62,14 @@
       });
 
       var map = new Map({
-        basemap: "stamen"
+        basemap: stamen
       });
 
       var view = new MapView({
         container: "map",
         map: map,
-        zoom: 10,
-        center: [0.1278, 51.5074]
+        zoom: 12,
+        center: [-0.100, 51.5074]
       });
 
       var toggle = new DefaultUI({
@@ -87,7 +87,7 @@
         [0.1078, 51.5474,'user5']
       ];
 
-      var mockJson = {"personalities": [{"Altruism": "0.385537374763", "Love": "0.385300974203", "Emotionality": "0.512108077928", "Sympathy": "0.62240275566", "Ideal": "0.362779722855", "Harmony": "0.240829263483", "Trust": "0.110861697225"}, {"Altruism": "0.936830479493", "Love": "0.0536111722051", "Emotionality": "0.576278254115", "Sympathy": "0.99993942884", "Ideal": "0.0237910755746", "Harmony": "0.014653746442", "Trust": "0.315728030914"}, {"Altruism": "0.883707433506", "Love": "0.00843993425943", "Emotionality": "0.880604271236", "Sympathy": "0.993843490452", "Ideal": "0.008817168833", "Harmony": "0.0303016596506", "Trust": "0.811143733595"}, {"Altruism": "0.980905391149", "Love": "0.340192468105", "Emotionality": "0.717257339034", "Sympathy": "0.98243256563", "Ideal": "0.209065694275", "Harmony": "0.637026676806", "Trust": "0.913365287488"}], "ids": ["3065675733", "1320535340", "18669246", "2479523070"], "coords": ["51.50013926,-0.12450144", "51.511841,-0.118559", "51.507695618,-0.127349761", "51.5,-0.13"], "scores": ["36.9204603124", "74.3324319951", "88.7269236993", "94.9312070608"], "helpers": ["UK Politics News", "wassim ajouz", "(((davidberens)))", "Edward Gibbon"], "message": "I need shelter near Trafalgar Square"}; 
+      var mockJson = {"personalities": [{"Altruism": "0.385537374763", "Love": "0.385300974203", "Emotionality": "0.512108077928", "Sympathy": "0.62240275566", "Ideal": "0.362779722855", "Harmony": "0.240829263483", "Trust": "0.110861697225"}, {"Altruism": "0.936830479493", "Love": "0.0536111722051", "Emotionality": "0.576278254115", "Sympathy": "0.99993942884", "Ideal": "0.0237910755746", "Harmony": "0.014653746442", "Trust": "0.315728030914"}, {"Altruism": "0.883707433506", "Love": "0.00843993425943", "Emotionality": "0.880604271236", "Sympathy": "0.993843490452", "Ideal": "0.008817168833", "Harmony": "0.0303016596506", "Trust": "0.811143733595"}, {"Altruism": "0.980905391149", "Love": "0.340192468105", "Emotionality": "0.717257339034", "Sympathy": "0.98243256563", "Ideal": "0.209065694275", "Harmony": "0.637026676806", "Trust": "0.913365287488"}], "ids": ["3065675733", "1320535340", "18669246", "2479523070"], "coords": ["51.50013926,-0.12450144", "51.511841,-0.118559", "51.507695618,-0.127349761", "51.5,-0.13"], "scores": ["36.9204603124", "74.3324319951", "88.7269236993", "94.9312070608"], "helpers": ["UK Politics News", "wassim ajouz", "(((davidberens)))", "Edward Gibbon"], "message": "I need shelter near Trafalgar Square"};
 
       var markerSymbol = new SimpleMarkerSymbol({
         color: [226, 119, 40],
@@ -115,7 +115,7 @@
           })
         }
       });
-      
+
 
       mockJson.coords.forEach(function (point, i) {
         var markerPos = new Point({
@@ -127,7 +127,7 @@
 
         var marker = new Graphic({
           geometry: markerPos,
-          symbol: symbolOrImg 
+          symbol: symbolOrImg
         });
 
         view.graphics.add(marker);
