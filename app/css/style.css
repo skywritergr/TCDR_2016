@@ -24,6 +24,10 @@ header:not(.esri-popup__header) {
   color: #333333;
 }
 
+.esri-popup__header-title {
+  font-size: 24px;
+}
+
 .logo {
   float: right;
   padding-right: 4px;
@@ -39,10 +43,18 @@ header:not(.esri-popup__header) {
   width: 300px;
   height: 300px;
 }
-.chart div {
-  height: 20px;
+
+.chart > div {
+    width: 100%;
+    background-color: #eaeaea;
+}
+
+.chart > div > div {
+  height: 30px;
+  line-height: 30px;
   background-color: lightblue;
   color: #000000;
   padding: 0 0 0 5px;
+  font-size: 22px;
   margin-bottom: 5px;
 }

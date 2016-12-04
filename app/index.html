@@ -118,14 +118,14 @@ function renderView(){
 
             var str = '<div class="chart">';
             for (attr in mockJson.personalities[host.id]) {
-              str += `<div style="width: ${mockJson.personalities[host.id][attr] * 300}px">${attr}</div>`;
+              str += `<div><div style="width: ${mockJson.personalities[host.id][attr] * 300}px">${attr}</div></div>`;
             }
             str += '</div>';
 
             view.popup.content = str;
 
             view.popup.open({
-              title: "Host: " + mockJson.helpers[host.id],
+              title: "Potential Host: " + mockJson.helpers[host.id],
               location: event.mapPoint
             });
           })
