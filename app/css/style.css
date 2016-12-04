@@ -14,16 +14,19 @@ body {
 header:not(.esri-popup__header) {
   position: fixed;
   width: 100%;
-  height: 40px;
+  height: 60px;
   background-color: rgba(255, 255, 255, 0.7);
   bottom: 1rem;
   z-index: 10;
-  font-family: 'Miriam Libre', sans-serif;
   text-transform: uppercase;
   line-height: 40px;
-  padding: 0 0.25rem;
   boz-sizing: border-box;
   color: #333333;
+}
+
+.logo {
+  float: right;
+  padding-right: 4px;
 }
 
 #content,
@@ -38,6 +41,9 @@ header:not(.esri-popup__header) {
 }
 .chart div {
   height: 20px;
-  background-color: blue;
+  background-color: lightblue;
+  color: #ffffff;
+  text-shadow: 1px 1px 1px #000000;
+  padding: 0 0 0 5px;
   margin-bottom: 5px;
 }

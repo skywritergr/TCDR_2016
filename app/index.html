@@ -15,14 +15,13 @@
   <script src="https://js.arcgis.com/4.1/"></script>
 
   <link rel="stylesheet" href="https://js.arcgis.com/4.1/esri/css/main.css">
-  <link href="https://fonts.googleapis.com/css?family=Miriam+Libre" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
 </head>
 
 <body>
   <header>
     <div class="logo">
-      Refugees.host
+      <img src="./name.png" height="46px" />
     </div>
   </header>
   <div id="content"></div>
@@ -106,10 +105,17 @@
 
           view.hitTest(event.screenPoint).then(function(crapStuff) {
             var host = crapStuff.results[0].graphic;
-            console.log(host)
-            view.popup.content = "<div class='chart'><div style='width: 300px'></div><div style='width: 250px'></div><div style='width: 150px'></div></div>";
+
+            var str = '<div class="chart">';
+            for (attr in mockJson.personalities[host.id]) {
+              str += `<div style="width: ${mockJson.personalities[host.id][attr] * 300}px">${attr}</div>`;
+            }
+            str += '</div>';
+
+            view.popup.content = str;
+
             view.popup.open({
-              title: "Host " + host.id,
+              title: "Host: " + mockJson.helpers[host.id],
               location: event.mapPoint
             });
           })
@@ -127,7 +133,8 @@
 
         var marker = new Graphic({
           geometry: markerPos,
-          symbol: symbolOrImg
+          symbol: symbolOrImg,
+          id: i
         });
 
         view.graphics.add(marker);
