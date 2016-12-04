@@ -85,8 +85,8 @@ function renderView(){
       var view = new MapView({
         container: "map",
         map: map,
-        zoom: 12,
-        center: [-0.100, 51.5074]
+        zoom: 14,
+        center: [-0.130, 51.505]
       });
 
       var toggle = new DefaultUI({
@@ -150,6 +150,20 @@ function renderView(){
         view.graphics.add(marker);
       })
     });
+
+    var tweet = document.createElement('div');
+    tweet.appendChild(document.createTextNode(`Refugee: "${mockJson.message}"`));
+    tweet.style.position = "absolute";
+    tweet.style.zIndex = "300";
+    tweet.style.fontSize = "20px";
+    tweet.style.padding = "20px";
+    tweet.style.backgroundColor = "#ffffff";
+    tweet.style.top = "25px";
+    tweet.style.left = "25px";
+
+    var currentDiv = document.getElementById("content");
+    document.body.insertBefore(tweet, currentDiv);
+
 }
 
   </script>
