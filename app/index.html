@@ -82,14 +82,11 @@
           view.hitTest(event.screenPoint).then(function(crapStuff) {
             var host = crapStuff.results[0].graphic;
             console.log(host)
+            view.popup.content = "<div class='chart'><div style='width: 300px'></div><div style='width: 250px'></div><div style='width: 150px'></div></div>";
             view.popup.open({
               title: "Host " + host.id,
               location: event.mapPoint
             });
-
-            $.get('./sunburst.txt', function (svg) {
-              view.popup.content = "<div style='width:400px; height:400px;'>" + svg + "</div>";
-            })
           })
         }
       });
