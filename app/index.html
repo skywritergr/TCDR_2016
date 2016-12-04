@@ -33,33 +33,19 @@
 
 var mockJson = {};
 
-function httpGet(theUrl)
-{
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
-    xmlHttp.send( null );
-    return xmlHttp.responseText;
-}
-
 function setJson(res){
   mockJson = res;
 };
 
 var jqxhr = $.getJSON( 'http://disruptlondon2015.appspot.com/list', function(data) {
 })
-  .done(function(data) {
-    setJson(data);
-    // alert( "second success" );
-  })
-  .fail(function() {
-    alert( "error" );
-  })
-  .always(function() {
-    // alert( "finished" );
-  });
+.done(function(data){
+  setJson(data);
+  renderView();
+});
 
-
-    require([
+function renderView(){
+      require([
       "esri/config",
       "esri/Map",
       "esri/views/MapView",
@@ -164,6 +150,8 @@ var jqxhr = $.getJSON( 'http://disruptlondon2015.appspot.com/list', function(dat
         view.graphics.add(marker);
       })
     });
+}
+
   </script>
 </body>
 
