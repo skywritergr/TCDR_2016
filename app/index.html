@@ -29,16 +29,39 @@
   <script src="build/main.js"></script>
   <script>
     require([
+      "esri/config",
       "esri/Map",
       "esri/views/MapView",
       "esri/views/ui/DefaultUI",
+      "esri/layers/WebTileLayer",
+      "esri/Basemap",
       "esri/geometry/Point",
       "esri/symbols/SimpleMarkerSymbol",
       "esri/Graphic",
       "dojo/domReady!"
-    ], function(Map, MapView, DefaultUI, Point, SimpleMarkerSymbol, Graphic) {
+    ], function(esriConfig, Map, MapView, DefaultUI, WebTileLayer, Basemap, Point, SimpleMarkerSymbol, Graphic) {
+
+      esriConfig.request.corsEnabledServers.push("a.tile.stamen.com",
+        "b.tile.stamen.com", "c.tile.stamen.com", "d.tile.stamen.com");
+
+      var mapBaseLayer = new WebTileLayer({
+        urlTemplate: "http://{subDomain}.tile.stamen.com/terrain/{level}/{col}/{row}.png",
+        subDomains: ["a", "b", "c", "d"],
+        copyright: "Map tiles by <a href=\"http://stamen.com/\">Stamen Design</a>, " +
+          "under <a href=\"http://creativecommons.org/licenses/by/3.0\">CC BY 3.0</a>. " +
+          "Data by <a href=\"http://openstreetmap.org/\">OpenStreetMap</a>, " +
+          "under <a href=\"http://creativecommons.org/licenses/by-sa/3.0\">CC BY SA</a>."
+      });
+
+      var stamen = new Basemap({
+        baseLayers: [ mapBaseLayer ],
+        title: "Terrain",
+        id: "terrain",
+        thumbnailUrl: "http://stamen-tiles.a.ssl.fastly.net/terrain/10/177/409.png"
+      });
+
       var map = new Map({
-        basemap: "streets"
+        basemap: stamen
       });
 
       var view = new MapView({
