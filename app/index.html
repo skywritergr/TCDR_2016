@@ -148,9 +148,10 @@ var jqxhr = $.getJSON( 'http://disruptlondon2015.appspot.com/list', function(dat
 
 
       mockJson.coords.forEach(function (point, i) {
+        console.log(point.split(",")[1] + Math.random())
         var markerPos = new Point({
-          longitude: point.split(",")[1],
-          latitude: point.split(",")[0]
+          longitude: Number(point.split(",")[1]) + (Math.random() - 0.5) / 70,
+          latitude: Number(point.split(",")[0]) + (Math.random() - 0.5) / 70
         });
 
         var symbolOrImg = (i < 3) ?  picSymbol : markerSymbol;
