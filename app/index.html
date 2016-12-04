@@ -44,8 +44,8 @@
       var view = new MapView({
         container: "map",
         map: map,
-        zoom: 6,
-        center: [-1.846320, 53.437426]
+        zoom: 10,
+        center: [0.1278, 51.5074]
       });
 
       var toggle = new DefaultUI({
@@ -56,9 +56,11 @@
       view.ui.move([ "zoom", toggle ], "top-right");
 
       var json = [
-        [-1.846320, 53.437426],
-        [-3.846320, 55.437426],
-        [-5.846320, 57.437426]
+        [0.1378, 51.5174],
+        [0.1478, 51.5014],
+        [0.0278, 51.6074],
+        [0.1178, 51.5074],
+        [0.1078, 51.5474]
       ];
 
       var markerSymbol = new SimpleMarkerSymbol({
@@ -71,18 +73,26 @@
 
       view.on("click", function(event) {
 
-        view.popup.open({
-          title: "Host",
-          location: event.mapPoint
-        });
+        if (event.target.localName === "circle") {
 
-        $.get('./sunburst.txt', function (svg) {
-          view.popup.content = "<div>" + svg + "</div>";
-        })
+          view.hitTest(event.screenPoint).then(function(crapStuff) {
+            var host = crapStuff.results[0].graphic;
 
+            console.log(host)
+
+            view.popup.open({
+              title: "Host " + host.id,
+              location: event.mapPoint
+            });
+
+            $.get('./sunburst.txt', function (svg) {
+              view.popup.content = "<div style='width:400px; height:400px;'>" + svg + "</div>";
+            })
+          })
+        }
       });
 
-      json.forEach(function (point) {
+      json.forEach(function (point, i) {
         var markerPos = new Point({
           longitude: point[0],
           latitude: point[1]
@@ -90,7 +100,8 @@
 
         var marker = new Graphic({
           geometry: markerPos,
-          symbol: markerSymbol
+          symbol: markerSymbol,
+          id: i
         });
 
         view.graphics.add(marker);
