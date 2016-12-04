@@ -18,6 +18,7 @@ app.use('/node_modules', express.static(__dirname + '/node_modules'));
 
 app.get('/config', twilio.getTwilioConfig);
 app.post('/msg', twilio.recieveMessage);
+app.post('/list', twilio.getTwiterData);
 
 // app.post('/conferenceRoom', twilio.createConferenceCallRoom);
 // app.post('/call', twilio.connectDoctorAndPatient);

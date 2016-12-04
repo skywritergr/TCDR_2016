@@ -34,9 +34,10 @@
       "esri/views/ui/DefaultUI",
       "esri/geometry/Point",
       "esri/symbols/SimpleMarkerSymbol",
+      "esri/symbols/PictureMarkerSymbol",
       "esri/Graphic",
       "dojo/domReady!"
-    ], function(Map, MapView, DefaultUI, Point, SimpleMarkerSymbol, Graphic) {
+    ], function(Map, MapView, DefaultUI, Point, SimpleMarkerSymbol, PictureMarkerSymbol, Graphic) {
       var map = new Map({
         basemap: "streets"
       });
@@ -56,12 +57,14 @@
       view.ui.move([ "zoom", toggle ], "top-right");
 
       var json = [
-        [0.1378, 51.5174],
-        [0.1478, 51.5014],
-        [0.0278, 51.6074],
-        [0.1178, 51.5074],
-        [0.1078, 51.5474]
+        [0.1378, 51.5174, 'user1'],
+        [0.1478, 51.5014,'user2'],
+        [0.0278, 51.6074,'user3'],
+        [0.1178, 51.5074,'user4'],
+        [0.1078, 51.5474,'user5']
       ];
+
+      var mockJson = {"personalities": [{"Altruism": "0.385537374763", "Love": "0.385300974203", "Emotionality": "0.512108077928", "Sympathy": "0.62240275566", "Ideal": "0.362779722855", "Harmony": "0.240829263483", "Trust": "0.110861697225"}, {"Altruism": "0.936830479493", "Love": "0.0536111722051", "Emotionality": "0.576278254115", "Sympathy": "0.99993942884", "Ideal": "0.0237910755746", "Harmony": "0.014653746442", "Trust": "0.315728030914"}, {"Altruism": "0.883707433506", "Love": "0.00843993425943", "Emotionality": "0.880604271236", "Sympathy": "0.993843490452", "Ideal": "0.008817168833", "Harmony": "0.0303016596506", "Trust": "0.811143733595"}, {"Altruism": "0.980905391149", "Love": "0.340192468105", "Emotionality": "0.717257339034", "Sympathy": "0.98243256563", "Ideal": "0.209065694275", "Harmony": "0.637026676806", "Trust": "0.913365287488"}], "ids": ["3065675733", "1320535340", "18669246", "2479523070"], "coords": ["51.50013926,-0.12450144", "51.511841,-0.118559", "51.507695618,-0.127349761", "51.5,-0.13"], "scores": ["36.9204603124", "74.3324319951", "88.7269236993", "94.9312070608"], "helpers": ["UK Politics News", "wassim ajouz", "(((davidberens)))", "Edward Gibbon"], "message": "I need shelter near Trafalgar Square"}; 
 
       var markerSymbol = new SimpleMarkerSymbol({
         color: [226, 119, 40],
@@ -71,15 +74,14 @@
         }
       });
 
+      var picSymbol = new PictureMarkerSymbol('http://static.arcgis.com/images/Symbols/Shapes/BluePin1LargeB.png', 60, 60);
+
+
       view.on("click", function(event) {
-
-        if (event.target.localName === "circle") {
-
+        if (event.target.localName === "image") {
           view.hitTest(event.screenPoint).then(function(crapStuff) {
             var host = crapStuff.results[0].graphic;
-
             console.log(host)
-
             view.popup.open({
               title: "Host " + host.id,
               location: event.mapPoint
@@ -91,22 +93,23 @@
           })
         }
       });
+      
 
-      json.forEach(function (point, i) {
+      mockJson.coords.forEach(function (point, i) {
         var markerPos = new Point({
-          longitude: point[0],
-          latitude: point[1]
+          longitude: point.split(",")[1],
+          latitude: point.split(",")[0]
         });
+
+        var symbolOrImg = (i < 3) ?  picSymbol : markerSymbol;
 
         var marker = new Graphic({
           geometry: markerPos,
-          symbol: markerSymbol,
-          id: i
+          symbol: symbolOrImg 
         });
 
         view.graphics.add(marker);
       })
-
     });
   </script>
 </body>
