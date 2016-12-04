@@ -46,9 +46,9 @@ function setJson(res){
 };
 
 var jqxhr = $.getJSON( 'http://disruptlondon2015.appspot.com/list', function(data) {
-  setJson(data);
 })
-  .done(function() {
+  .done(function(data) {
+    setJson(data);
     // alert( "second success" );
   })
   .fail(function() {
@@ -148,7 +148,6 @@ var jqxhr = $.getJSON( 'http://disruptlondon2015.appspot.com/list', function(dat
 
 
       mockJson.coords.forEach(function (point, i) {
-        console.log(point.split(",")[1] + Math.random())
         var markerPos = new Point({
           longitude: Number(point.split(",")[1]) + (Math.random() - 0.5) / 70,
           latitude: Number(point.split(",")[0]) + (Math.random() - 0.5) / 70
