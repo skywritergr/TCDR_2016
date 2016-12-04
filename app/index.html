@@ -9,21 +9,34 @@
   <title>Refugees.host | Helping by Hosting</title>
   <script src="../node_modules/react/dist/react.js"></script>
   <script src="../node_modules/react-dom/dist/react-dom.min.js"></script>
+  <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.14/d3.min.js"></script>
+  <script src="https://rawgit.com/ibm-silvergate/personality-sunburst-chart/master/bin/personality-sunburst-chart.standalone.js"></script>
   <script src="https://js.arcgis.com/4.1/"></script>
 
   <link rel="stylesheet" href="https://js.arcgis.com/4.1/esri/css/main.css">
+  <link href="https://fonts.googleapis.com/css?family=Miriam+Libre" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
 </head>
 
 <body>
+  <header>
+    <div class="logo">
+      Refugees.host
+    </div>
+  </header>
   <div id="content"></div>
   <script src="build/main.js"></script>
   <script>
     require([
       "esri/Map",
       "esri/views/MapView",
+      "esri/views/ui/DefaultUI",
+      "esri/geometry/Point",
+      "esri/symbols/SimpleMarkerSymbol",
+      "esri/Graphic",
       "dojo/domReady!"
-    ], function(Map, MapView) {
+    ], function(Map, MapView, DefaultUI, Point, SimpleMarkerSymbol, Graphic) {
       var map = new Map({
         basemap: "streets"
       });
@@ -34,6 +47,55 @@
         zoom: 6,
         center: [-1.846320, 53.437426]
       });
+
+      var toggle = new DefaultUI({
+        view: view,
+        nextBasemap: "hybrid"
+      });
+
+      view.ui.move([ "zoom", toggle ], "top-right");
+
+      var json = [
+        [-1.846320, 53.437426],
+        [-3.846320, 55.437426],
+        [-5.846320, 57.437426]
+      ];
+
+      var markerSymbol = new SimpleMarkerSymbol({
+        color: [226, 119, 40],
+        outline: {
+          color: [255, 255, 255],
+          width: 2
+        }
+      });
+
+      view.on("click", function(event) {
+
+        view.popup.open({
+          title: "Host",
+          location: event.mapPoint
+        });
+
+        $.get('./sunburst.txt', function (svg) {
+          view.popup.content = "<div>" + svg + "</div>";
+        })
+
+      });
+
+      json.forEach(function (point) {
+        var markerPos = new Point({
+          longitude: point[0],
+          latitude: point[1]
+        });
+
+        var marker = new Graphic({
+          geometry: markerPos,
+          symbol: markerSymbol
+        });
+
+        view.graphics.add(marker);
+      })
+
     });
   </script>
 </body>
